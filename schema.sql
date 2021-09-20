@@ -2,6 +2,7 @@
 CREATE DATABASE vet_clinic;
 
 CREATE TABLE animals (
+    id INT AUTO_INCREMENT,
     name varchar(100),
     date_of_birth DATE NOT NULL,
     escape_attempts INT,
