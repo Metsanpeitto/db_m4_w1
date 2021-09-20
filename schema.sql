@@ -2,6 +2,7 @@
 CREATE DATABASE vet_clinic;
 
 CREATE TABLE animals (
+    id INT AUTO_INCREMENT,
     name varchar(100),
     date_of_birth DATE NOT NULL,
     escape_attempts INT,
@@ -40,6 +41,6 @@ ALTER TABLE animals	ADD COLUMN id SERIAL PRIMARY KEY;
 /* Remove column species */
 ALTER TABLE animals DROP COLUMN species;
 /* Add column species_id which is a foreign key referencing species table */
-ALTER TABLE animals ADD  COLUMN species_id INT, ADD FOREIGN KEY (species_id) REFERENCES species(id);
+ALTER TABLE animals ADD  COLUMN species_id varchar(100), ADD FOREIGN KEY (species_id) REFERENCES species(name);
 /* Add column owner_id which is a foreign key referencing the owners table */
 ALTER TABLE animals ADD  COLUMN owner_id INT, ADD FOREIGN KEY (owner_id) REFERENCES owners(id);
