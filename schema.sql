@@ -2,7 +2,7 @@
 CREATE DATABASE vet_clinic;
 
 CREATE TABLE animals (
-    id INT GENERATED ALWAYS AS IDENTITY,
+    id INT SERIAL,
     name varchar(100),
     date_of_birth DATE NOT NULL,
     escape_attempts INT,
@@ -18,7 +18,7 @@ full_name: string
 age: integer   */
 
 CREATE TABLE owners (
-    id INT AUTO_INCREMENT,
+    id INT SERIAL,
     full_name varchar(100),
     age INT,
     PRIMARY KEY(id)
@@ -29,7 +29,7 @@ id: integer (set it as autoincremented PRIMARY KEY)
 name: string */
 
 CREATE TABLE species (
-    id INT AUTO_INCREMENT,
+    id INT SERIAL,
     name varchar(100),    
     PRIMARY KEY(id)
     );
