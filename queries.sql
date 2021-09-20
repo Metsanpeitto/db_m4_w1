@@ -40,3 +40,9 @@ SELECT MAX(weight_kg),MIN(weight_kg), neutered FROM animals GROUP BY neutered;
 SELECT AVG(escape_attempts), neutered FROM animals WHERE date_of_birth > '1990-01-01' AND date_of_birth < '2000-01-01' GROUP BY neutered ;
 
 /* Tasks-3*/ 
+/* What animals belong to Melody Pond? */
+SELECT * FROM animals INNER JOIN owners ON owner_id = owners.id WHERE full_name = 'Melody Pond';
+/* List of all animals that are pokemon (their type is Pokemon). */
+SELECT * FROM animals INNER JOIN species ON species.id = animals.species_id WHERE species.name = 'Pokemon';
+/* List all owners and their animals, remember to include those that don't own any animal. */
+SELECT full_name, name  FROM owners INNER JOIN animals ON animals.owner_id = owners.id WHERE owners.name != null ;
