@@ -12,7 +12,6 @@ Project 4: add "join table" for visits.
 Project 5: database performance audit.
 Exercise: add database schema diagram.
 
-
 ## Authors
 
 👤 **Abraham Rodriguez**
