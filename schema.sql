@@ -43,3 +43,29 @@ ALTER TABLE animals ADD FOREIGN KEY (species_id) REFERENCES species(id);
 /* Add column owner_id which is a foreign key referencing the owners table */
 ALTER TABLE animals ADD  owner_id INT;
 ALTER TABLE animals ADD FOREIGN KEY (owner_id) REFERENCES owners(id);
+
+
+/* Task-4 */
+CREATE TABLE vets (
+    vet_id SERIAL PRIMARY KEY,
+    name varchar(100),
+    age INT,
+    date_of_graduation DATE NOT NULL
+);
+
+CREATE TABLE specializations (
+    vet_name varchar(100),
+    species_name varchar(100)
+);
+
+CREATE TABLE visits (
+    id INT GENERATED ALWAYS AS IDENTITY,
+    vet_id INT,
+    animal_id INT,	
+    animal_name varchar(100), 
+    vet_name varchar(100),    
+    date_of_visit DATE NOT NULL,
+    UNIQUE ( animal_name, date_of_visit),
+	FOREIGN KEY (vet_id) REFERENCES vets(vet_id), 
+	FOREIGN KEY (animal_id) REFERENCES animals(id)
+);

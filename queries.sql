@@ -83,7 +83,6 @@ SELECT AVG(escape_attempts), species_id  FROM animals WHERE date_of_birth > '199
 
 /* Tasks-3*/ 
 
-
 /* What animals belong to Melody Pond? */
 SELECT * FROM animals INNER JOIN owners ON owner_id = owners.id WHERE full_name = 'Melody Pond';
 
@@ -116,3 +115,38 @@ AND owners.full_name = 'Dean Winchester';
 SELECT full_name, COUNT(*) as total FROM owners
 LEFT JOIN animals 
 ON owners.id = animals.owner_id GROUP BY full_name ORDER BY total desc;
+
+
+/* Tasks-4*/ 
+/*  Who was the last animal seen by William Tatcher? */
+SELECT animal_name FROM visits WHERE vet_name = 'William Tatcher' ORDER BY date_of_visit DESC LIMIT 1;
+
+/*  How many different animals did Stephanie Mendez see?  */
+SELECT DISTINCT animal_name FROM visits WHERE vet_name = 'Stephanie Mendez';
+
+/*  List all vets and their specialties, including vets with no specialties.  */
+SELECT name, species_name FROM specializations LEFT JOIN vets ON specializations.vet_name = name ;
+
+/*  List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.  */
+SELECT DISTINCT name  FROM visits JOIN animals ON 
+visits.vet_name = 'Stephanie Mendez'
+AND visits.date_of_visit > '2020-04-01' AND visits.date_of_visit < '2020-08-30' ;
+
+/*  What animal has the most visits to vets?  */
+SELECT DISTINCT animals.name, COUNT(animal_name)  FROM visits JOIN animals ON 
+visits.animal_name = animals.name
+GROUP BY animals.name ORDER BY COUNT(animal_name) DESC LIMIT 1;
+
+/*  Who was Maisy Smith's first visit?  */
+SELECT animal_name, date_of_visit FROM visits ORDER BY date_of_visit ASC LIMIT 1;
+
+/*  Details for most recent visit: animal information, vet information, and date of visit. */
+SELECT animal_name, animal_id, vet_id, vet_name, date_of_visit 
+FROM visits ORDER BY date_of_visit DESC LIMIT 1;
+
+/*  How many visits were with a vet that did not specialize in that animal's species? */
+SELECT animal_name, visits.vet_name, COUNT(visits.vet_name), date_of_visit
+FROM visits JOIN specializations ON
+specializations.vet_name != visits.vet_name 
+WHERE animal_name = specializations.species_name
+ORDER BY COUNT(visits.vet_name) DESC ;
