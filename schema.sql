@@ -10,7 +10,7 @@ CREATE TABLE animals (
     weight_kg DECIMAL(3) NOT NULL
 );
 
-ALTER TABLE animals ADD COLUMN species varchar(100);
+ALTER TABLE animals ADD COLUMN species INT;
 
 /* Create a table named owners with the following columns:
 id: integer (set it as autoincremented PRIMARY KEY)

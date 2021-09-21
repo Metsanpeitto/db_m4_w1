@@ -150,4 +150,3 @@ INSERT INTO visits (vet_id, animal_id,vet_name, animal_name, date_of_visit) VALU
  ( (SELECT vet_id FROM vets WHERE name = 'William Tatcher'  LIMIT 1),
    (SELECT id FROM animals WHERE name = 'Boarmon'  LIMIT 1), 
 'William Tatcher' ,'Boarmon',  '2021-01-11');
-
