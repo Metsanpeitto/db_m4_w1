@@ -12,8 +12,6 @@ SELECT * FROM animals WHERE weight_kg > 10.4 AND weight_kg =< 17.3;
 
 
 
-
-
 /* task-2 */
 
 /* Inside a transaction update the animals table by setting the species column to unspecified.
@@ -118,6 +116,7 @@ ON owners.id = animals.owner_id GROUP BY full_name ORDER BY total desc;
 
 
 /* Tasks-4*/ 
+
 /*  Who was the last animal seen by William Tatcher? */
 SELECT animal_name FROM visits WHERE vet_name = 'William Tatcher' ORDER BY date_of_visit DESC LIMIT 1;
 
@@ -125,7 +124,7 @@ SELECT animal_name FROM visits WHERE vet_name = 'William Tatcher' ORDER BY date_
 SELECT DISTINCT animal_name FROM visits WHERE vet_name = 'Stephanie Mendez';
 
 /*  List all vets and their specialties, including vets with no specialties.  */
-SELECT name, species_name FROM specializations LEFT JOIN vets ON specializations.vet_name = name ;
+SELECT name, species_id FROM specializations LEFT JOIN vets ON specializations.vet_id = vets.vet_id ;
 
 /*  List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.  */
 SELECT DISTINCT name  FROM visits JOIN animals ON 
@@ -138,21 +137,22 @@ visits.animal_name = animals.name
 GROUP BY animals.name ORDER BY COUNT(animal_name) DESC LIMIT 1;
 
 /*  Who was Maisy Smith's first visit?  */
-SELECT animal_name, date_of_visit FROM visits ORDER BY date_of_visit ASC LIMIT 1;
+SELECT animal_name, date_of_visit FROM visits WHERE vet_name = 'Maisy Smith'  ORDER BY date_of_visit   ASC
+ LIMIT 1;
 
 /*  Details for most recent visit: animal information, vet information, and date of visit. */
 SELECT animal_name, animal_id, vet_id, vet_name, date_of_visit 
 FROM visits ORDER BY date_of_visit DESC LIMIT 1;
 
 /*  How many visits were with a vet that did not specialize in that animal's species? */
-SELECT COUNT(visits.id) ,visits.vet_name, specializations.species_name 
+SELECT COUNT(visits.id) ,visits.vet_name
 FROM visits
 INNER JOIN vets ON vets.vet_id = visits.vet_id
 INNER JOIN specializations ON
-specializations.vet_name != visits.vet_name
+specializations.vet_id != visits.vet_id
 INNER JOIN animals ON animals.id = visits.animal_id
-INNER JOIN species ON specializations.species_name = (SELECT name FROM species WHERE id = (SELECT animals.species FROM animals WHERE animals.name = visits.animal_name))
-GROUP BY visits.vet_name, specializations.species_name ORDER BY COUNT(visits.id) DESC
+INNER JOIN species ON specializations.species_id = (SELECT animals.species FROM animals WHERE animals.name = visits.animal_name)
+GROUP BY visits.vet_name ORDER BY COUNT(visits.id) DESC
 ;
 
 /* What specialty should Maisy Smith consider getting? Look for the species she gets the most. */

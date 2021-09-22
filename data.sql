@@ -44,10 +44,23 @@ INSERT INTO vets (name, age, date_of_graduation ) VALUES ('Maisy Smith' , 26 , '
 INSERT INTO vets (name, age, date_of_graduation ) VALUES ('Stephanie Mendez' , 64 , '1981-5-4');
 INSERT INTO vets (name, age, date_of_graduation ) VALUES ('Jack Harkness' , 38 , '2008-6-8');
 
-INSERT INTO specializations (vet_name, species_name) VALUES ('William Tatcher' , 'Pokemon');
-INSERT INTO specializations (vet_name, species_name) VALUES ('Stephanie Mendez' , 'Pokemon');
-INSERT INTO specializations (vet_name, species_name) VALUES ('Stephanie Mendez' , 'Digimon');
-INSERT INTO specializations (vet_name, species_name) VALUES ('Jack Harkness' , 'Digimon');
+
+INSERT INTO specializations (vet_id, species_id) VALUES
+ ((SELECT vet_id FROM vets WHERE name = 'William Tatcher'),
+  (SELECT id FROM species WHERE name = 'Pokemon'));
+
+INSERT INTO specializations (vet_id, species_id) VALUES
+ ((SELECT vet_id FROM vets WHERE name = 'Stephanie Mendez'),
+  (SELECT id FROM species WHERE name = 'Pokemon'));
+
+INSERT INTO specializations (vet_id, species_id) VALUES
+ ((SELECT vet_id FROM vets WHERE name = 'Stephanie Mendez'),
+  (SELECT id FROM species WHERE name = 'Digimon'));
+
+INSERT INTO specializations (vet_id, species_id) VALUES
+ ((SELECT vet_id FROM vets WHERE name = 'Jack Harkness'),
+  (SELECT id FROM species WHERE name = 'Digimon'));
+
 
 INSERT INTO visits (vet_id, animal_id,vet_name, animal_name, date_of_visit) VALUES
  ((SELECT vet_id FROM vets WHERE name = 'William Tatcher' LIMIT 1), 

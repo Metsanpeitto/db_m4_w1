@@ -54,8 +54,8 @@ CREATE TABLE vets (
 );
 
 CREATE TABLE specializations (
-    vet_name varchar(100),
-    species_name varchar(100)
+    vet_id INT,
+    species_id INT
 );
 
 CREATE TABLE visits (
