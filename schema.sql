@@ -69,3 +69,15 @@ CREATE TABLE visits (
 	FOREIGN KEY (vet_id) REFERENCES vets(vet_id), 
 	FOREIGN KEY (animal_id) REFERENCES animals(id)
 );
+
+/*  Taks 5: database performance audit */
+-- Add an email column to your owners table
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
+CREATE INDEX animal_id ON visits (animal_id ASC);
+
+-- Optimize visits table by creating an Index using the vets_id column
+CREATE INDEX vets_id ON visits (vet_id ASC);
+
+-- -- Optimize owners table by creating an Index using the email column
+CREATE INDEX owners_mail  ON owners (email ASC);

@@ -167,14 +167,21 @@ ORDER BY COUNT(*) DESC
 LIMIT 1;
 ;
 
+/*  1st Saturate the DB with new visits entries                   */
+INSERT INTO visits (animal_id, vet_id, date_of_visit) SELECT * FROM (SELECT id FROM animals) animal_ids, (SELECT vet_id FROM vets) vets_ids, generate_series('1980-01-01'::timestamp, '2021-01-01', '4 hours') visit_timestamp;
+
+/*  Test the normal time to run a query   */
+EXPLAIN ANALYZE SELECT COUNT(*) FROM visits where animal_id = 4; 
+/*  Execution Time: 1188.593 ms */
+
+CREATE INDEX idx_visits_animal_id ON visits (animal_id);
+
+EXPLAIN ANALYZE SELECT COUNT(*) FROM visits where animal_id = 4; 
+/*  Execution Time: 1255.301 ms */
+DROP INDEX visits_id_asc;
+
 
 /*  Taks 5: database performance audit */
-/*  Find a way to decrease the execution time of these queries. 
-EXPLAIN ANALYZE SELECT COUNT(*) FROM visits where animal_id = 4; ( Execution Time: 170.126 ms ) */
-EXPLAIN ANALYZE SELECT COUNT(id) FROM visits where animal_id = 4; /* (  Execution Time: 152.305 ms ) */
-
-/* EXPLAIN ANALYZE  SELECT * FROM visits where vet_id = 2;   ( Execution Time: 333.405 ms )  */
-EXPLAIN ANALYZE  SELECT vet_id FROM visits where vet_id = 2; /* ( 313.847 ms ) */
-
-/* EXPLAIN ANALYZE SELECT * FROM owners where email = 'owner_18327@mail.com'; (  Execution Time: 128.035 ms ) */
-EXPLAIN ANALYZE SELECT email FROM owners where email = 'owner_18327@mail.com'; /*  Execution Time: 126.596 ms */
+explain analyze SELECT COUNT(*) FROM visits where animal_id = 4;
+explain analyze SELECT * FROM visits where vet_id = 2;
+explain analyze SELECT * FROM owners where email = 'owner_18327@mail.com';
