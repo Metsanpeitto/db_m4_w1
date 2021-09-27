@@ -183,5 +183,8 @@ DROP INDEX visits_id_asc;
 
 /*  Taks 5: database performance audit */
 explain analyze SELECT COUNT(*) FROM visits where animal_id = 4;
+/*  After creating the index animal_id_index */
+explain analyze SELECT COUNT(animal_id) FROM visits where animal_id = 4;
+
 explain analyze SELECT * FROM visits where vet_id = 2;
 explain analyze SELECT * FROM owners where email = 'owner_18327@mail.com';
