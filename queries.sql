@@ -77,8 +77,6 @@ SELECT AVG(escape_attempts), species_id  FROM animals WHERE date_of_birth > '199
 
 
 
-
-
 /* Tasks-3*/ 
 
 /* What animals belong to Melody Pond? */
