@@ -1,7 +1,12 @@
 # Vet clinic database
 Build a relational database based on a real-life example.
 
-## Dabtabase optimization
+
+# Database Schema
+
+![Schema](./screenshots/schema.png)
+
+## Database optimization
 
 To test the optimization of the databse by creating Indexes we get the following results: 
 
