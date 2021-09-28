@@ -1,16 +1,51 @@
 # Vet clinic database
 Build a relational database based on a real-life example.
 
-## Getting Started
 
-You will find details about each of the project requirements in the upcoming program activities.
+# Database Schema
 
-Project 1: create animals table.
-Project 2: query and update animals table.
-Project 3: query multiple tables.
-Project 4: add "join table" for visits.
-Project 5: database performance audit.
-Exercise: add database schema diagram.
+![Schema](./screenshots/schema.png)
+
+## Database optimization
+
+To test the optimization of the databse by creating Indexes we get the following results: 
+
+#### - 1 Test
+
+explain analyze SELECT COUNT(*) FROM visits where animal_id = 4;
+
+![Before Index](./screenshots/dbA1.png)
+
+CREATE INDEX animal_id ON visits (animal_id ASC);
+
+explain analyze SELECT COUNT(*) FROM visits where animal_id = 4;
+
+![After Index](./screenshots/dbA2.png)
+
+
+#### - 2 Test
+
+explain analyze SELECT * FROM visits where vet_id = 2;
+
+![Before Index](./screenshots/dbB1.png)
+
+CREATE INDEX vets_id ON visits (vet_id ASC);
+
+explain analyze SELECT * FROM visits where vet_id = 2;
+
+![After Index](./screenshots/dbB2.png)
+
+#### - 2 Test
+
+explain analyze SELECT * FROM owners where email = 'owner_18327@mail.com';
+
+![Before Index](./screenshots/dbC1.png)
+
+CREATE INDEX owners_mail  ON owners (email ASC);
+
+explain analyze SELECT * FROM owners where email = 'owner_18327@mail.com';
+
+![After Index](./screenshots/dbC2.png)
 
 
 ## Authors
