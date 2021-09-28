@@ -30,3 +30,10 @@ CREATE TABLE treatments(
   name VARCHAR(50)
 );
 
+CREATE TABLE treatment(
+  medical_history_id INT,
+  treatment_id INT,
+  FOREIGN KEY(medical_history_id) REFERENCES medical_histories(id),
+  FOREIGN KEY(treatment_id) REFERENCES treatments(id)
+);
+
