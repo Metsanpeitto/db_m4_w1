@@ -14,4 +14,14 @@ CREATE TABLE medical_histories (
     PRIMARY KEY(id)
 );
 
+CREATE TABLE invoices (
+    id              INT GENERATED ALWAYS AS IDENTITY,
+    total_amount    FLOAT,
+    generated_at    TIMESTAMP,
+    payed_at        TIMESTAMP,
+    medical_history_id      INT,
+    FOREIGN KEY (medical_history_id) REFERENCES medical_histories (id),
+    PRIMARY KEY(id)
+);
+
 
