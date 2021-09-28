@@ -37,3 +37,13 @@ CREATE TABLE treatment(
   FOREIGN KEY(treatment_id) REFERENCES treatments(id)
 );
 
+CREATE TABLE invoice_items(
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  unit_price DECIMAL,
+  quantity INT,
+  total_price decimal,
+  invoice_id INT,
+  treatment_id INT,
+  FOREIGN KEY(invoice_id) REFERENCES invoices(id),
+  FOREIGN KEY(treatment_id) REFERENCES treatments(id)
+);
