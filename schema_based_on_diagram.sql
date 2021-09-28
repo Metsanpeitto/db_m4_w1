@@ -24,4 +24,9 @@ CREATE TABLE invoices (
     PRIMARY KEY(id)
 );
 
+CREATE TABLE treatments(
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  type VARCHAR(50),
+  name VARCHAR(50)
+);
 
