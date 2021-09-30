@@ -1,7 +1,5 @@
 /* Populate database with sample data. */
 
-INSERT INTO animals (name) VALUES ('Luna');
-INSERT INTO animals (name) VALUES ('Daisy');
 INSERT INTO animals (name) VALUES ('Charlie');
 INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg) VALUES ('Agumon','2020-02-03',0,'true',10.23);
 INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg) VALUES ('Gabumon','2018-11-15',2,'true',8);
@@ -171,4 +169,6 @@ INSERT INTO visits (animal_id, vet_id, date_of_visit) SELECT * FROM (SELECT id F
 
 -- This will add 2.500.000 owners with full_name = 'Owner <X>' and email = 'owner_<X>@email.com' (~2min approx.)
 INSERT INTO owners (full_name, email) select 'Owner ' || generate_series(1,2500000), 'owner_' || generate_series(1,2500000) || '@mail.com';
+
+INSERT INTO animals (name) VALUES ('Charlie');
 
